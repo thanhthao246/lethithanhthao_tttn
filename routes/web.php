@@ -9,7 +9,9 @@ use App\Http\Controllers\backend\TopicController;
 
 use App\Http\Controllers\backend\ProductController;
 
-
+//file này bị thay đổi
+//nhập message cho commit
+//nhấn commit
 
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 Route::get('lien-he', [LienheController::class, 'index'])->name('site.index');
