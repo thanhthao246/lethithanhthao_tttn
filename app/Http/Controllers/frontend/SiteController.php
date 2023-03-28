@@ -13,7 +13,6 @@ use App\Models\Product;
 
 class SiteController extends Controller
 {
-<<<<<<< HEAD
     public function index($slug = null)
     {
         if ($slug == null) {
@@ -48,31 +47,14 @@ class SiteController extends Controller
                     case 'page': {
                             return $this->post_page($slug);
                         }
-                    
                 }
             }
         }
-        //return view('frontend.home');
     }
     //trang chủ
-    public function home()
-=======
-    public function index($slug=null)
->>>>>>> 72f1578c13cc71f5b1497745957833a2ef8700fe
-    {
-        if($slug==null)
-        {
-            return $this->home();
-        }
-        else
-        {
-            ...
-        }
-    }
-    #Home
     private function home()
     {
-        ...
+        return view('frontend.home');
     }
     public function product_category($slug)
     {
