@@ -32,14 +32,18 @@ class ProductController extends Controller
     #GET: admin/product/create, admin/product/create
     public function create()
     {
-        $list_product = Product::where('status', '!=', 0)->get();
-        $html_parent_id = '';
-        $html_sort_order = '';
-        foreach ($list_product as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+        $list_category = Category::where('status', '!=', 0)->get();
+        $list_brand = Brand::where('status', '!=', 0)->get();
+        $html_category_id = '';
+        foreach ($list_category as $item) {
+            $html_category_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
         }
-        return view('backend.product.create', compact('html_parent_id', 'html_sort_order'));
+        $html_brand_id = '';
+        foreach ($list_brand as $item) {
+            $html_brand_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+        }
+
+        return view('backend.product.create', compact('html_category_id', 'html_brand_id'));
     }
 
     /**
@@ -47,7 +51,7 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $product = new Category; //tạo mới
+        $product = new Product; //tạo mới
         $product->name = $request->name;
         $product->slug = Str::slug($product->name = $request->name, '-');
         $product->metakey = $request->metakey;
