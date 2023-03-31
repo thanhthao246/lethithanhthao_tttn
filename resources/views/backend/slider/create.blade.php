@@ -2,7 +2,7 @@
 @section('title','Thêm danh mục sản phẩm')
 @section('conten')
 
-<form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('slider.store')}}" method="post" enctype="multipart/form-data">
   @csrf
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,7 +34,7 @@
                 <button type="submit" class="btn btn-sm btn-success">
                   <i class="fas fa-save"></i>Lưu
                 </button>
-                <a href="{{route('category.index')}}" class="btn btn-sm btn-info">
+                <a href="{{route('slider.index')}}" class="btn btn-sm btn-info">
                   <i class="fas fa-reply"></i>Quay về danh sách
                 </a>
               </div>

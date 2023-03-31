@@ -29,13 +29,13 @@
           <div class="row">
             <div class="col-md-6"></div>
               <div class="col-md-6 text-right">
-                <a href="{{route('category.edit', ['category'=>$category->id])}}" class="btn btn-sm btn-primary">
+                <a href="{{route('slider.edit', ['slider'=>$slider->id])}}" class="btn btn-sm btn-primary">
                   <i class="fas fa-edit"></i>Sửa
                 </a>
-                <a href="{{route('category.delete', ['category'=>$category->id])}}" class="btn btn-sm btn-danger">
+                <a href="{{route('slider.delete', ['slider'=>$slider->id])}}" class="btn btn-sm btn-danger">
                   <i class="fas fa-trash-alt"></i>Xóa
                 </a>
-                <a href="{{route('category.index')}}" class="btn btn-sm btn-info">
+                <a href="{{route('slider.index')}}" class="btn btn-sm btn-info">
                   <i class="fas fa-reply"></i>Quay về danh sách
                 </a>
               </div>
@@ -49,55 +49,55 @@
             </tr>
             <tr>
               <td>Id</td>
-              <td>{{$category->id}}</td>
+              <td>{{$slider->id}}</td>
             </tr>
             <tr>
               <td>name</td>
-              <td>{{$category->name}}</td>
+              <td>{{$slider->name}}</td>
             </tr>
             <tr>
               <td>slug</td>
-              <td>{{$category->slug}}</td>
+              <td>{{$slider->slug}}</td>
             </tr>
             <tr>
               <td>parent_id</td>
-              <td>{{$category->parent_id}}</td>
+              <td>{{$slider->parent_id}}</td>
             </tr>
             <tr>
               <td>sort_order</td>
-              <td>{{$category->sort_order}}</td>
+              <td>{{$slider->sort_order}}</td>
             </tr>
             <tr>
               <td>Id</td>
-              <td>{{$category->image}}</td>
+              <td>{{$slider->image}}</td>
             </tr>
             <tr>
               <td>metakey</td>
-              <td>{{$category->metakey}}</td>
+              <td>{{$slider->metakey}}</td>
             </tr>
             <tr>
               <td>metadesc</td>
-              <td>{{$category->metadesc}}</td>
+              <td>{{$slider->metadesc}}</td>
             </tr>
             <tr>
               <td>created_by</td>
-              <td>{{$category->created_by}}</td>
+              <td>{{$slider->created_by}}</td>
             </tr>
             <tr>
               <td>update_by</td>
-              <td>{{$category->update_by}}</td>
+              <td>{{$slider->update_by}}</td>
             </tr>
             <tr>
               <td>status</td>
-              <td>{{$category->status}}</td>
+              <td>{{$slider->status}}</td>
             </tr>
             <tr>
               <td>created_at</td>
-              <td>{{$category->created_at}}</td>
+              <td>{{$slider->created_at}}</td>
             </tr>
             <tr>
               <td>update_at</td>
-              <td>{{$category->update_at}}</td>
+              <td>{{$slider->update_at}}</td>
           </tr>
           </table>
           
