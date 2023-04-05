@@ -143,68 +143,12 @@
                     </div>
                 </div>
             </div> --}}
+            @foreach ($list_category as $row_category)
+                <x-product-home :rowcat="$row_category"/>
+            @endforeach
             <div class="col-sm-12 padding-right">
             <!--sản phẩm bán chạy -->
-                <div class="features_items">
-                    <h2 class="title text-center">Sản phẩm bán chạy</h2>
-                    <div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{asset('public/images/home/sanpham1.jpg')}}" alt="" />
-                                    <h2>145,000đ</h2>
-                                    <p>Dâu tây Nhật bản</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>145,000đ</h2>
-                                        <p>Dâu tây Nhật bản</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{asset('public/images/home/sanpham1.jpg')}}" alt="" />
-                                    <h2>145,000đ</h2>
-                                    <p>Dâu tây Nhật bản</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>145,000đ</h2>
-                                        <p>Dâu tây Nhật bản</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{asset('public/images/home/sanpham1.jpg')}}" alt="" />
-                                    <h2>145,000đ</h2>
-                                    <p>Dâu tây Nhật bản</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>145,000đ</h2>
-                                        <p>Dâu tây Nhật bản</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>thêm vào giỏ hàng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <!--end-->
                 <div class="category-tab"><!--category-tab-->

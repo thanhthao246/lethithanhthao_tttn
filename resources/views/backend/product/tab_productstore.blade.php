@@ -14,7 +14,7 @@
         <input type="text" name="qty" value="{{old('qty')}}" id="qty" class="form-control" placeholder="số lượng">
         @if($errors->has('qty'))
         <div class="text-danger">
-          {{ $errors->first('name')}}
+          {{ $errors->first('qty')}}
         </div>
         @endif
       </div>

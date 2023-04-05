@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use PhpParser\Builder\FunctionLike;
 use App\Models\Link;
@@ -54,7 +55,8 @@ class SiteController extends Controller
     //trang chủ
     private function home()
     {
-        return view('frontend.home');
+        $list_category = Category::where([['parent_id', '=', 0], ['status', '=', 1]])->get();
+        return view('frontend.home', compact('list_category'));
     }
     public function product_category($slug)
     {

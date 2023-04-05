@@ -48,6 +48,11 @@
           <option value="">--Chọn danh mục--</option>
           {!! $html_category_id !!}
         </select>
+        @if($errors->has('category_id'))
+        <div class="text-danger">
+          {{ $errors->first('category_id')}}
+        </div>
+        @endif
       </div>
       <!--thương hiệu-->
       <div class="md-3">
@@ -56,6 +61,11 @@
           <option value="">--Chọn thương hiệu--</option>
           {!! $html_brand_id !!}
         </select>
+        @if($errors->has('brand_id'))
+        <div class="text-danger">
+          {{ $errors->first('brand_id')}}
+        </div>
+        @endif
       </div>
 
       <div class="md-3">

@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-
+use App\Models\Productimage;
+use App\Models\Productsale;
+use App\Models\Productstore;
 
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
@@ -20,7 +22,7 @@ class ProductController extends Controller
     #GET: admin/product, admin/product/index
     public function index()
     {
-        $list_product = Product::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
+        $list_product = Product::join('lttt_product_image', 'lttt_product_image.product_id', '=', 'lttt_product.id')->where('lttt_product.status', '!=', 0)->orderBy('lttt_product.created_at', 'desc')->get();
         return view('backend.product.index', compact('list_product'));
     }
     #GET:admin/product/trash
@@ -51,31 +53,60 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
+
         $product = new Product; //tạo mới
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
         $product->name = $request->name;
         $product->slug = Str::slug($product->name = $request->name, '-');
+        $product->price_buy = $request->price_buy;
+        $product->detail = $request->detail;
         $product->metakey = $request->metakey;
         $product->metadesc = $request->metadesc;
-        $product->parent_id = $request->parent_id;
-        $product->sort_order = $request->sort_order;
-        $product->status = $request->status;
         $product->created_at = date('Y-m-d H:i:s');
         $product->created_by = 1;
-        //upload file
-        if ($request->has('image')) {
-            $path_dir = "public/images/product/";
-            if (File::exists(public_path($path_dir . $product->image))) {
-                File::delete(public_path($path_dir . $product->image));
+        $product->status = $request->status;
+        if ($product->save() == 1) {
+            //uploaod hình ảnh
+            if ($request->has('image')) {
+                $path_dir = "images/product/";
+                if (File::exists(public_path($path_dir . $product->image))) {
+                    File::delete(public_path($path_dir . $product->image));
+                }
+                $array_file = $request->file('image');
+                $i = 1;
+                foreach ($array_file as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = $product->slug . "-" . $i . "-" . "." . $extension;
+                    $file->move($path_dir, $filename);
+                    $Product_image = new Productimage();
+                    $Product_image->product_id = $product->id;
+                    $Product_image->image = $filename;
+                    $Product_image->save();
+                    $i++;
+                }
             }
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $product->slug . '.' . $extension;
-            $file->move($path_dir, $filename);
-            $product->image = $filename;
+            //khuyến mãi
+            if (strlen($request->price_sale) && strlen($request->date_begin) && strlen($request->date_end)) {
+                $Product_sale = new Productsale();
+                $Product_sale->product_id = $product->id;
+                $Product_sale->price_sale = $request->price_sale;
+                $Product_sale->date_begin = $request->date_begin;
+                $Product_sale->date_end = $request->date_end;
+                $Product_sale->save();
+            }
         }
-        // end upload file
-        $product->save();
-        return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => ' Thêm mẫu tin thành công !']);
+        //kho nhập
+        if (strlen($request->price) && strlen($request->qty)) {
+            $Product_store = new Productstore();
+            $Product_store->product_id = $product->id;
+            $Product_store->price = $request->price;
+            $Product_store->qty = $request->qty;
+            $Product_store->created_at = date('Y-m-d H:i:s');
+            $Product_store->created_by = 1;
+            $Product_store->save();
+        }
+        return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => 'Thêm mẫu tin thành công !']);
     }
 
     public function show($id)

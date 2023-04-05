@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product_option extends Model
+class Productimage extends Model
 {
     use HasFactory;
-    protected $table = 'lttt_product_option';
+    protected $table = 'lttt_product_image';
+    public $timestamps = false;
 }
