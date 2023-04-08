@@ -10,8 +10,6 @@ use App\Models\Link;
 use App\Models\Post;
 use App\Models\Product;
 
-
-
 class SiteController extends Controller
 {
     public function index($slug = null)

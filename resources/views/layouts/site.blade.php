@@ -12,7 +12,8 @@
     <link href="{{asset('public/css/price-range.css')}}" rel="stylesheet">
     <link href="{{asset('public/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('public/css/main.css')}}" rel="stylesheet">
-	<link href="{{asset('public/css/responsive.css')}}" rel="stylesheet">      
+	<link href="{{asset('public/css/responsive.css')}}" rel="stylesheet">     
+	@yield('header') 
     <link rel="shortcut icon" href="{{asset('public/images/ico/favicon.ico')}}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{asset('public/images/ico/apple-touch-icon-144-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('public/images/ico/apple-touch-icon-114-precomposed.png')}}">
@@ -148,5 +149,6 @@
 	<script src="{{asset('js/price-range.js')}}"></script>
     <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+	@yield('footer')
 </body>
 </html>

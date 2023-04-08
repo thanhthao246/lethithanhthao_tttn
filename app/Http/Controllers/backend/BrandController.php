@@ -104,7 +104,7 @@ class BrandController extends Controller
      */
     public function update(BrandUpdateRequest $request, $id)
     {
-        $brand = Brand::fine($id);
+        $brand = Brand::find($id);
         $brand->name = $request->name;
         $brand->slug = Str::slug($brand->name = $request->name, '-');
         $brand->metakey = $request->metakey;
