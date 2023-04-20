@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>CHI TIẾT DANH MỤC</h1>
+            <h1>CHI TIẾT THƯƠNG HIỆU</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-              <li class="breadcrumb-item active">Chi tiết danh mục</li>
+              <li class="breadcrumb-item active">Chi tiết thương hiệu</li>
             </ol>
           </div>
         </div>
@@ -67,10 +67,10 @@
               <td>sort_order</td>
               <td>{{$brand->sort_order}}</td>
             </tr>
-            <tr>
+            {{-- <tr>
               <td>Id</td>
               <td>{{$brand->image}}</td>
-            </tr>
+            </tr> --}}
             <tr>
               <td>metakey</td>
               <td>{{$brand->metakey}}</td>

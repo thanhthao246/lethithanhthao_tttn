@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', $row_cat->name)
+@section('title', $row_brand->name)
 @section('header')
     <link href="{{ asset('public/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/owlcarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
@@ -17,7 +17,7 @@
             <div class="col-md-9">
                 <div class="section-product-category">
                     <h2 class="text-center my-3 caterory-title">
-                        {{ $row_cat->name }}
+                        {{ $row_brand->name }}
                     </h2>
                     <div class="row">
                         <div class="owl-carousel owl-them">
@@ -39,8 +39,7 @@
                                         </div>
                                     </div>
                                     <h3 class="product-name">
-                                        <a
-                                            href="{{ route('slug.home', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                        <a href="{{ route('slug.home', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">
                                         <div class="row">

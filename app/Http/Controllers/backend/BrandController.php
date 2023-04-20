@@ -42,31 +42,35 @@ class BrandController extends Controller
      */
     public function store(BrandStoreRequest $request)
     {
-        $brand = new Brand; //tạo mới
+        $brand = new Brand; // tạo mới
         $brand->name = $request->name;
         $brand->slug = Str::slug($brand->name = $request->name, '-');
         $brand->metakey = $request->metakey;
         $brand->metadesc = $request->metadesc;
-        $brand->parent_id = $request->parent_id;
         $brand->sort_order = $request->sort_order;
-        $brand->status = $request->status;
         $brand->created_at = date('Y-m-d H:i:s');
         $brand->created_by = 1;
-        //xử lý hình
-        $fileName = time() . '.' . $request->file->extension();
-        $request->file->move(public_path('images'), $fileName);
-
-        //
-        if ($brand->save()) {
+        $brand->status = $request->status;
+        // upload file
+        if ($request->has('image')) {
+            $path_dir = "public/images/brand/";
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = $brand->slug . '.' . $extension;
+            $file->move($path_dir, $filename);
+            $brand->image = $filename;
+        }
+        // end upload file  
+        if ($brand->save()) //lưu vào csdl
+        {
             $link = new Link();
             $link->slug = $brand->slug;
             $link->table_id = $brand->id;
             $link->type = 'brand';
             $link->save();
-            return redirect()->route('brand.index')->with('message', ['type' => 'success', 'msg' => ' Thêm mẫu tin thành công !']);
-        } //lưu vào dữ liệu
-        else {
-            return redirect()->route('brand.index')->with('message', ['type' => 'success', 'msg' => ' Thêm mẫu ti không thành công !']);
+            return redirect()->route('brand.index')->with('message', ['type' => 'success', 'msg' => 'Thêm Thành công']);
+        } else {
+            return redirect()->route('brand.index')->with('message', ['type' => 'danger', 'msg' => 'Thêm thất bại']);
         }
     }
 
@@ -83,9 +87,6 @@ class BrandController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $brand = Brand::find($id);
@@ -96,12 +97,10 @@ class BrandController extends Controller
             $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
             $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
         }
+
         return view('backend.brand.edit', compact('brand', 'html_parent_id', 'html_sort_order'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(BrandUpdateRequest $request, $id)
     {
         $brand = Brand::find($id);
@@ -109,7 +108,6 @@ class BrandController extends Controller
         $brand->slug = Str::slug($brand->name = $request->name, '-');
         $brand->metakey = $request->metakey;
         $brand->metadesc = $request->metadesc;
-        $brand->parent_id = $request->parent_id;
         $brand->sort_order = $request->sort_order;
         $brand->status = $request->status;
         $brand->updated_at = date('Y-m-d H:i:s');

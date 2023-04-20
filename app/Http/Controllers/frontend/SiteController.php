@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use PhpParser\Builder\FunctionLike;
 use App\Models\Link;
 use App\Models\Post;
+use App\Models\Topic;
 use App\Models\Product;
 
 class SiteController extends Controller
@@ -94,28 +95,76 @@ class SiteController extends Controller
     }
     private function product_brand($slug)
     {
-        $row_brand = Brand::where([['slug', '=', $slug], ['status', '=', '1']])->get();
-        $product_list = Product::where(['status', '=', 1], ['brand_id', '=', $row_brand->id])
+        $row_brand = Brand::where([['slug', '=', $slug], ['status', '=', '1']])->first();
+        $product_list = Product::where([['status', '=', '1'], ['brand_id', '=', $row_brand->id]])
             ->orderBy('created_at', 'desc')
             ->paginate(9);
         return view('frontend.product-brand', compact('product_list', 'row_brand'));
     }
+    private function product_detail($product)
+    {
+
+        $list_category_id = array();
+        array_push($list_category_id, $product->category_id);
+        //xét cấp con
+        $list_category1 = Category::where([['parent_id', '=', $product->category_id], ['status', '=', '1']])->get();
+        if (count($list_category1) > 0) {
+            foreach ($list_category1 as $row_cat1) {
+                array_push($list_category_id, $row_cat1->id);
+
+                $list_category2 = Category::where([['parent_id', '=', $row_cat1->id], ['status', '=', '1']])->get();
+                if (count($list_category2) > 0) {
+                    foreach ($list_category2 as $row_cat2) {
+                        array_push($list_category_id, $row_cat2->id);
+
+                        $list_category3 = Category::where([['parent_id', '=', $row_cat2->id], ['status', '=', '1']])->get();
+                        if (count($list_category3) > 0) {
+                            foreach ($list_category3 as $row_cat3) {
+                                array_push($list_category_id, $row_cat3->id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $product_list = Product::where([['status', '=', 1], ['id', '!=', $product->id]])
+            ->whereIn('category_id', $list_category_id)
+            ->orderBy('created_at', 'desc')
+            ->take(4)->get();
+        return view('frontend.product-detail', compact('product', 'product_list'));
+    }
+
     private function post_topic($slug)
     {
-        return view('frontend.post-topic');
+        $row_topic = Topic::where([['slug', '=', $slug], ['status', '=', '1']])->first();
+        $args = [
+            ['status', '=', 1],
+            ['type', '=', $post],
+            ['topic_id', '=', $row_topic->id]
+        ];
+        $post_list = Post::where($args)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+        return view('frontend.post-topic', compact('row_topic'));
     }
     private function post_page($slug)
     {
         return view('frontend.post-page');
     }
-    private function product_detail($product)
-    {
-        return view('frontend.product-detail');
-    }
     private function post_detail($post)
     {
-        return view('frontend.post-detail');
+        $args = [
+            ['status', '=', 1],
+            ['id', '!=', $post->id],
+            ['type', '=', $post],
+            ['topic_id', '=', $post->topic_id]
+        ];
+        $post_list = Post::where()
+            ->orderBy('created_at', 'desc')
+            ->take(4)->get();
+        return view('frontend.post-detail', compact('post', 'post_list'));
     }
+
     private function error_404($slug)
     {
         return view('frontend.404');

@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>TẤT CẢ DANH MỤC</h1>
+            <h1>TẤT CẢ SẢN PHẨM</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></a></li>
-              <li class="breadcrumb-item active">Tất cả danh mục</li>
+              <li class="breadcrumb-item active">Tất cả sản phẩm</li>
             </ol>
           </div>
         </div>
