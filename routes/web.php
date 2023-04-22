@@ -10,8 +10,8 @@ use App\Http\Controllers\backend\PageController;
 use App\Http\Controllers\backend\TopicController;
 use App\Http\Controllers\backend\MenuController;
 use App\Http\Controllers\backend\SliderController;
-
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\AuthController;
 
 //file này bị thay đổi
 //nhập message cho commit
@@ -19,14 +19,20 @@ use App\Http\Controllers\backend\ProductController;
 
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 Route::get('lien-he', [LienheController::class, 'index'])->name('site.index');
-Route::get('tat-ca-san-pham', [sanphamController::class, 'index'])->name('site.index');
-Route::get('bai-viet', [baivietController::class, 'index'])->name('site.index');
+Route::get('san-pham', [SiteController::class, 'product'])->name('site.product');
+Route::get('thuong-hieu', [SiteController::class, 'brand'])->name('site.brand');
+Route::get('bai-viet', [SiteController::class, 'post'])->name('site.post');
 Route::get('khach-hang', [LienheController::class, 'index'])->name('site.index');
 Route::get('gio-hang', [LienheController::class, 'index'])->name('site.index');
 
+//xử lý login
+Route::get('admin/login', [AuthController::class, 'getlogin'])->name('getlogin');
+Route::post('admin/login', [AuthController::class, 'postlogin'])->name('postlogin');
+// Route::get('admin/login', 'backend/AuthController@getlogin')->name('getlogin');
+// Route::post('admin/login', 'backend/AuthController@postlogin')->name('postlogin');
 
 //khai báo route cho trang quan lí
-Route::prefix('admin')->group(function () {
+Route::prefix('admin', 'LoginAdmin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('brand', BrandController::class);
     //product
@@ -104,6 +110,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('product', ProductController::class);
 });
+
 
 
 

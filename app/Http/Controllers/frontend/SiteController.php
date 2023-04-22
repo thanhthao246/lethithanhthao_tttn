@@ -61,7 +61,7 @@ class SiteController extends Controller
         $list_category = Category::where([['parent_id', '=', 0], ['status', '=', 1]])->get();
         return view('frontend.home', compact('list_category'));
     }
-    private function product_category($slug)
+    public function product_category($slug)
     {
         $row_cat = Category::where([['slug', '=', $slug], ['status', '=', '1']])->first();
         $list_category_id = array();
@@ -93,7 +93,7 @@ class SiteController extends Controller
             ->paginate(9);
         return view('frontend.product-category', compact('product_list', 'row_cat'));
     }
-    private function product_brand($slug)
+    public function product_brand($slug)
     {
         $row_brand = Brand::where([['slug', '=', $slug], ['status', '=', '1']])->first();
         $product_list = Product::where([['status', '=', '1'], ['brand_id', '=', $row_brand->id]])
@@ -101,7 +101,7 @@ class SiteController extends Controller
             ->paginate(9);
         return view('frontend.product-brand', compact('product_list', 'row_brand'));
     }
-    private function product_detail($product)
+    public function product_detail($product)
     {
 
         $list_category_id = array();
@@ -134,29 +134,35 @@ class SiteController extends Controller
         return view('frontend.product-detail', compact('product', 'product_list'));
     }
 
-    private function post_topic($slug)
+    public function post_topic($slug)
     {
         $row_topic = Topic::where([['slug', '=', $slug], ['status', '=', '1']])->first();
         $args = [
             ['status', '=', 1],
-            ['type', '=', $post],
+            ['type', '=', 'post'],
             ['topic_id', '=', $row_topic->id]
         ];
         $post_list = Post::where($args)
             ->orderBy('created_at', 'desc')
             ->paginate(9);
-        return view('frontend.post-topic', compact('row_topic'));
+        return view('frontend.post-topic', compact('row_topic', 'post_list'));
     }
-    private function post_page($slug)
+    public function post_page($slug)
     {
-        return view('frontend.post-page');
+        $args = [
+            ['status', '=', 1],
+            ['type', '=', 'page'],
+            ['slug', '=', $slug]
+        ];
+        $post = Post::where($args)->fisrt();
+        return view('frontend.post-page', compact('post'));
     }
-    private function post_detail($post)
+    public function post_detail($post)
     {
         $args = [
             ['status', '=', 1],
             ['id', '!=', $post->id],
-            ['type', '=', $post],
+            ['type', '=', 'post'],
             ['topic_id', '=', $post->topic_id]
         ];
         $post_list = Post::where()
@@ -165,8 +171,30 @@ class SiteController extends Controller
         return view('frontend.post-detail', compact('post', 'post_list'));
     }
 
-    private function error_404($slug)
+    public function error_404($slug)
     {
         return view('frontend.404');
+    }
+    //tát cả sản phẩm
+    public function product()
+    {
+        $product_list = Product::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+        return view('frontend.product', compact('product_list'));
+    }
+    public function brand()
+    {
+        $product_list = Product::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+        return view('frontend.brand', compact('product_list'));
+    }
+    public function post()
+    {
+        $post_list = Post::where([['status', '=', 1], ['type', '=', 'post']])
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+        return view('frontend.post', compact('post_list'));
     }
 }

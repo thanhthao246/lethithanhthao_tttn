@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Cập nhật danh mục sản phẩm')
+@section('title','Cập nhật bài viết')
 @section('conten')
 
 <form action="{{route('topic.update',['topic'=>$topic->id])}}" method="post" enctype="multipart/form-data">
@@ -11,12 +11,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>CẬP NHẬT DANH MỤC</h1>
+            <h1>CẬP NHẬT BÀI VIẾT</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-              <li class="breadcrumb-item active">Cập nhật danh mục</li>
+              <li class="breadcrumb-item active">Cập nhật bài viết</li>
             </ol>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <div class="row">
             <div class="col-md-9">
               <div class="md-3">
-                <label for="name">Tên danh mục</label>
+                <label for="name">Tên bài viết</label>
                 <input type="text" name="name" value="{{old('name',$topic->name)}}" id="name" class="form-control" placeholder="nhập tên danh mục">
                 @if($errors->has('name'))
                 <div class="text-danger">
@@ -76,7 +76,7 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="md-3">
+              {{-- <div class="md-3">
                 <label for="parent_id">Danh mục cha</label>
                 <select class="form-control" id="parent_id" name="parent_id">
                   <option value="0">--Cấp cha--</option>
@@ -90,7 +90,7 @@
                   <option value="0">--Vị trí sắp xếp--</option>
                   {!! $html_sort_order !!}
                 </select>
-              </div>
+              </div> --}}
 
               <div class="md-3">
                 <label for="image">Hình đại diện</label>

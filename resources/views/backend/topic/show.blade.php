@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Chi tiết danh mục sản phẩm')
+@section('title','Chi tiết bài viết')
 @section('conten')
 
   <div class="content-wrapper">

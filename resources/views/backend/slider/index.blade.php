@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','tất cả danh mục sản phẩm')
+@section('title','tất cả slider')
 @section('conten')
 
 <div class="content-wrapper">
@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>TẤT CẢ DANH MỤC</h1>
+            <h1>TẤT CẢ SLIDER</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></a></li>
-              <li class="breadcrumb-item active">Tất cả danh mục</li>
+              <li class="breadcrumb-item active">Tất cả slider</li>
             </ol>
           </div>
         </div>
@@ -28,9 +28,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-6">
-              <button class="btn-sm btn-danger" type="submit">
-                <i class="fas fa-trash-alt"></i>Xóa
-              </button>
+              
             </div>
               <div class="col-md-6 text-right">
                 <a href="{{ route('slider.create')}}" class="btn btn-sm btn-success">
@@ -49,7 +47,7 @@
               <tr>
                 <th style="width:20px;" class="text-center">#</th>
                 <th style="width:90px;" class="text-center">Hình ảnh</th>
-                <th>tên danh mục</th>
+                <th>tên slider</th>
                 <th>slug</th>
                 <th style="width:160px;" class="text-center">Ngày đăng</th>
                 <th style="width:170px;" class="text-center">Chức năng</th>

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Cập nhật danh mục sản phẩm')
+@section('title','Cập nhật slider')
 @section('conten')
 
 <form action="{{route('slider.update',['slider'=>$slider->id])}}" method="post" enctype="multipart/form-data">
@@ -11,12 +11,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>CẬP NHẬT DANH MỤC</h1>
+            <h1>CẬP NHẬT SLIDER</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Bảng điều khiển</a></li>
-              <li class="breadcrumb-item active">Cập nhật danh mục</li>
+              <li class="breadcrumb-item active">Cập nhật sliderc</li>
             </ol>
           </div>
         </div>
@@ -55,7 +55,7 @@
                 @endif
               </div>
 
-              <div class="md-3">
+              {{-- <div class="md-3">
                 <label for="metakey">Từ khóa</label>
                 <textarea name="metakey" id="metakey" class="form-control" placeholder="Từ khóa tìm kiếm">{{old('metakey', $slider->metakey)}}</textarea>
                 @if($errors->has('metakey'))
@@ -73,10 +73,10 @@
                   {{ $errors->first('metadesc')}}
                 </div>
                 @endif
-              </div>
+              </div> --}}
             </div>
             <div class="col-md-3">
-              <div class="md-3">
+              {{-- <div class="md-3">
                 <label for="parent_id">Danh mục cha</label>
                 <select class="form-control" id="parent_id" name="parent_id">
                   <option value="0">--Cấp cha--</option>
@@ -90,7 +90,7 @@
                   <option value="0">--Vị trí sắp xếp--</option>
                   {!! $html_sort_order !!}
                 </select>
-              </div>
+              </div> --}}
 
               <div class="md-3">
                 <label for="image">Hình đại diện</label>
