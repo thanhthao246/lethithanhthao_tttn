@@ -71,21 +71,21 @@
                 <td class="text-center">{{$product->created_at}}</td>
                 <td class="text-center">
                   @if($product->status==1)
-                  <a href="{{ route('product.status', ['product'=>$product->id])}}" class="ntn btn-sm btn-success">
+                  <a href="{{ route('product.status', ['product'=>$product->id])}}" class="btn btn-sm btn-success">
                     <i class="fas fa-toggle-on"></i>
                   </a>
                   @else
-                  <a href="{{ route('product.status', ['product'=>$product->id])}}" class="ntn btn-sm btn-danger">
+                  <a href="{{ route('product.status', ['product'=>$product->id])}}" class="btn btn-sm btn-danger">
                     <i class="fas fa-toggle-off"></i>
                   </a>
                   @endif
-                  <a href="{{ route('product.edit', ['product'=>$product->id])}}" class="ntn btn-sm btn-info">
+                  <a href="{{ route('product.edit', ['product'=>$product->id])}}" class="btn btn-sm btn-info">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a href="{{ route('product.show', ['product'=>$product->id])}}" class="ntn btn-sm btn-warning">
+                  <a href="{{ route('product.show', ['product'=>$product->id])}}" class="btn btn-sm btn-warning">
                     <i class="fas fa-eye"></i>
                   </a>
-                  <a href="{{ route('product.delete', ['product'=>$product->id])}}" class="ntn btn-sm btn-danger">
+                  <a href="{{ route('product.delete', ['product'=>$product->id])}}" class="btn btn-sm btn-danger">
                     <i class="fas fa-trash"></i>
                   </a>
                 </td>

@@ -28,7 +28,6 @@
         href="{{ asset('public/images/ico/apple-touch-icon-57-precomposed.png') }}">
 </head>
 <!--/head-->
-
 <body>
     <header id="header">
         <!--header-->
@@ -49,10 +48,7 @@
             </div>
         </div>
         </div>
-
-
         <!--/header_top-->
-
         <div class="header-middle">
             <!--header-middle-->
             <div class="container">
@@ -61,7 +57,8 @@
                         <div class="logo pull-left">
                             <a href="index.html">
                                 <img src="{{ asset('public/images/home/logo100.png') }}"
-                                    style="width:290px;height:90px;"alt="" /></a>
+                                    style="width:290px;height:90px;"alt="" />
+                            </a>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -71,7 +68,6 @@
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
                                 <li><a href="checkout.html">Đăng xuất</a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -80,10 +76,9 @@
         </div>
         <!--/header-middle-->
     </header>
+    
     <!--/header-->
     <x-main-menu />
-
-    <x-slideshow />
     <section class="maincontent">
         @yield('content')
     </section>

@@ -5,26 +5,29 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
     function getlogin()
     {
-        return view('backend.user.login');
+        return view('backend.auth.login');
     }
-    function postlogin(Request $request)
+    function postlogin(LoginRequest $request)
     {
         $usersname = $request->usersname;
         $password = $request->password;
-        if (filter_var($usersname, FILTER_VALIDATE_EMAIL)) {
-            $data = ['email' => $usersname, 'password' => $password];
-        } else {
-            $data = ['name' => $usersname, 'password' => $password];
-        }
+        $data = ['username' => $usersname, 'password' => $password];
         if (Auth::attempt($data)) {
-            echo "thành công";
+            return redirect(('admin'));
+            echo bcrypt($password);
         } else {
-            echo "thất bại";
+            return redirect(('admin/login'));
+            echo bcrypt($password);
         }
+    }
+    function logout(){
+        Auth::logout();
+        return redirect(('admin/login'));
     }
 }

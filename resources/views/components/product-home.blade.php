@@ -41,7 +41,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-sale">-10%</div>
                 </div>
             @endforeach
         </div>

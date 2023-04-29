@@ -28,11 +28,13 @@ Route::get('gio-hang', [LienheController::class, 'index'])->name('site.index');
 //xử lý login
 Route::get('admin/login', [AuthController::class, 'getlogin'])->name('getlogin');
 Route::post('admin/login', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::get('admin/logout', [AuthController::class, 'logout'])->name('logout');
+
 // Route::get('admin/login', 'backend/AuthController@getlogin')->name('getlogin');
 // Route::post('admin/login', 'backend/AuthController@postlogin')->name('postlogin');
 
 //khai báo route cho trang quan lí
-Route::prefix('admin', 'LoginAdmin')->group(function () {
+route::group(['prefix' => 'admin', 'middleware' => 'LoginAdmin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('brand', BrandController::class);
     //product

@@ -59,7 +59,6 @@
                                 </div>
                             @endforeach
                         </div>
-
                     </div>
                     <div>{{ $product_list->Links() }}</div>
                 </div>

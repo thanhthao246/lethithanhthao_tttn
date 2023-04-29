@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+<x-slideshow />
     <div class="container">
         <div class="row">
            

@@ -178,9 +178,10 @@ class SiteController extends Controller
     //tát cả sản phẩm
     public function product()
     {
+
         $product_list = Product::where('status', 1)
             ->orderBy('created_at', 'desc')
-            ->paginate(9);
+            ->paginate(20);
         return view('frontend.product', compact('product_list'));
     }
     public function brand()
