@@ -1,12 +1,5 @@
 @extends('layouts.site')
 @section('title', $product->name)
-{{-- @section('header')
-    <link href="{{ asset('public/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/owlcarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
-@endsection
-@section('footer')
-    <script src="{{ asset('public/owlcarousel/owl.carousel.min.js') }}"></script>
-@endsection --}}
 @section('content')
     @php
         $product_image = $product->productimg;
@@ -30,17 +23,21 @@
                             <div class="col-md-3">
                                 <img class="img-fluid w-100" src="{{ asset('images/product/' . $hinh) }}"
                                     alt="{{ $hinh }}">
-
                             </div>
                         @endfor
                     </div>
                 @endif
             </div>
             <div class="col-md-6">
-                <h1>{{ $product->name }}</h1>
-                <h1>Giá: {{ $product->price_buy }}</h1>
+                <h2>{{ $product->name }}</h2>
+                <h3>Giá: {{ $product->price_buy }} vnđ</h3>
             </div>
-
+            <label>Số lượng:</label>
+            <input type="text" value="3" />
+            <button type="button" class="btn btn-fefault cart">
+                <i class="fa fa-shopping-cart"></i>
+                Thêm vào giỏ hàng
+            </button>
             <div class="my-4">
                 <h3>Chi tiết sản phẩm</h3>
                 <p>{!! $product->detail !!}</p>
@@ -75,8 +72,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <strong>
-                                            <span
-                                                class="price">{{ $row_pro->price_buy }}</span>-<del>{{ $row_pro->price_sale }}</del>
+                                            <span class="price">{{ $row_pro->price_buy }} vnđ</span>
                                         </strong>
                                     </div>
                                     <div class="col-ms-2 text-center"><br>
@@ -93,3 +89,4 @@
         @endif
     </div>
 @endsection
+

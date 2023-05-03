@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@yield('title')</title>
-    <link href="{{asset('public/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> --}}
     <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -28,6 +28,7 @@
         href="{{ asset('public/images/ico/apple-touch-icon-57-precomposed.png') }}">
 </head>
 <!--/head-->
+
 <body>
     <header id="header">
         <!--header-->
@@ -67,7 +68,6 @@
                                 <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                                <li><a href="checkout.html">Đăng xuất</a></li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
         </div>
         <!--/header-middle-->
     </header>
-    
+
     <!--/header-->
     <x-main-menu />
     <section class="maincontent">

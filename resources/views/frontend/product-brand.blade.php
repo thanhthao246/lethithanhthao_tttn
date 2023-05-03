@@ -39,14 +39,14 @@
                                         </div>
                                     </div>
                                     <h3 class="product-name">
-                                        <a href="{{ route('slug.home', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                        <a
+                                            href="{{ route('slug.home', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                     </h3>
                                     <div class="product-price">
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <strong>
-                                                    <span
-                                                        class="price">{{ $product->price_buy }}</span>-<del>{{ $product->price_sale }}</del>
+                                                    <span class="price">{{ $product->price_buy }}</span>
                                                 </strong>
                                             </div>
                                             <div class="col-ms-2 text-center"><br>

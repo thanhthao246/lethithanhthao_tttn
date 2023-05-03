@@ -17,8 +17,9 @@
                 <x-product-home :rowcat="$row_category"/>
             @endforeach
             <div class="col-sm-12 padding-right">
+                
+            </div> 
 
-            </div>
         </div>
     </div>
 @endsection

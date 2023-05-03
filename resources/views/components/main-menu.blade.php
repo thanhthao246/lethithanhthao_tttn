@@ -1,54 +1,58 @@
 <div>
     <!-- The best way to take care of the future is to take care of the present moment. - Thich Nhat Hanh -->
-    <div class="collapse navbar-collapse" id="main_nav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            @foreach ($list_menu as $rowmenu)
-                <x-menu-item :menu="$rowmenu" />
-            @endforeach
-        </ul>
-        {{-- <ul class="navbar-nav ml-md-auto">
-            <li class="nav-item">
-                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">Tải ứng dụng</a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <img src="" alt="Hinh">
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">English</a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Russian</a>
-                </div>
-            </li>
-        </ul> --}}
-    </div>
-    <! {{-- <div class="header-bottom"><!--header-bottom-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+    <div>
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                @foreach ($list_menu as $row_menu)
+                                    @if ($row_menu->MainMenuSub->count())
+                                        <li class="dropdown">
+                                            <a href="{{ route('slug.home', ['slug' => $row_menu->link]) }}">
+                                                {{ $row_menu->name }}
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul role="menu" class="sub-menu">
+                                                @foreach ($row_menu->MainMenuSub as $main_menu_sub)
+                                                    <li>
+                                                        <a
+                                                            href="{{ route('slug.home', ['slug' => $main_menu_sub->link]) }}">
+                                                            {{ $main_menu_sub->name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{ route('slug.home', ['slug' => $row_menu->link]) }}">
+                                                {{ $row_menu->name }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                    <div class="mainmenu pull-left">
-                        <ul class="nav navbar-nav collapse navbar-collapse">
-                            @foreach ($list_menu as $row_menu)
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{$row_menu->link}}">{{$row_menu->name}}</a>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="search_box pull-right">
-                        <input type="text" placeholder="Tìm kiếm"/>
+                    <div class="col-sm-5">
+                        <form action="{{ URL::to('/tim-kiem') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="search_box pull-right">
+                                <input type="text" name="keywords_submit" id="keywords"
+                                    placeholder="Tìm kiếm sản phẩm" />
+                                <input type="submit" style="margin-top:0;color:#666" name="search_items"
+                                    class="btn btn-primary btn-sm" value="Tìm kiếm">
+                                <div id="search_ajax"></div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!--/header-bottom--> --}} 
+        <!--/header-bottom-->
+    </div>
 </div>

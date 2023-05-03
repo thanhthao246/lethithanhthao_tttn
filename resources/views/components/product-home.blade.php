@@ -30,7 +30,7 @@
                             <div class="col-md-9">
                                 <strong>
                                     <span
-                                        class="price">{{ $product->price_buy }}</span>-<del>{{ $product->price_sale }}</del>
+                                        class="price">{{ $product->price_buy }}vnđ</span>
                                 </strong>
                             </div>
                             <div class="col-ms-2 text-center"><br>
