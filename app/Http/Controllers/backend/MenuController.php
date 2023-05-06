@@ -161,7 +161,7 @@ class MenuController extends Controller
     public function edit($id)
     {
         $menu = Menu::find($id);
-        $list_menu = Menu::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
+        $list_menu = Menu::where('status', '!=', 0)->get();
         $html_parent_id = '';
         $html_sort_order = '';
         foreach ($list_menu as $item) {
@@ -170,6 +170,7 @@ class MenuController extends Controller
             } else {
                 $html_parent_id = '<option value="' . $item->id . '">' . $item->name . '</option>';
             }
+
             if ($menu->sort_order == $item->sort_order) {
                 $html_sort_order = '<option selected value="' . $item->sort_order . '">' . $item->name . '</option>';
             } else {

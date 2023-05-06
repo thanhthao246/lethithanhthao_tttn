@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-6">
                 <h2>{{ $product->name }}</h2>
-                <h3>Giá: {{ $product->price_buy }} vnđ</h3>
+                <h3>Giá:{{ number_format($product->price_buy) }} vnđ</h3>
             </div>
             <label>Số lượng:</label>
             <input type="text" value="3" />

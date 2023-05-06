@@ -29,12 +29,11 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <strong>
-                                    <span
-                                        class="price">{{ $product->price_buy }}vnđ</span>
+                                    <span class="price">{{ number_format($product->price_buy) }}vnđ</span>
                                 </strong>
                             </div>
                             <div class="col-ms-2 text-center"><br>
-                                <a href="cart.html" class="btn btn-default add-to-cart">
+                                <a href="{{route('gio-hang.AddCart',['id'=>$product->id])}}" class="btn btn-default add-to-cart">
                                     <i class="fa fa-shopping-cart" aria-hidden="true">Thêm giỏ hàng</i>
                                 </a>
 

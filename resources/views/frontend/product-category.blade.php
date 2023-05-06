@@ -47,7 +47,7 @@
                                             <div class="col-md-9">
                                                 <strong>
                                                     <span
-                                                        class="price">{{ $product->price_buy }}</span>
+                                                        class="price">{{ number_format($product->price_buy) }}</span>
                                                 </strong>
                                             </div>
                                             <div class="col-ms-2 text-center"><br>

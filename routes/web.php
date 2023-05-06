@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\MenuController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\AuthController;
+use App\Http\Controllers\backend\CartController;
 
 //file này bị thay đổi
 //nhập message cho commit
@@ -23,9 +24,14 @@ Route::get('san-pham', [SiteController::class, 'product'])->name('site.product')
 Route::get('thuong-hieu', [SiteController::class, 'brand'])->name('site.brand');
 Route::get('bai-viet', [SiteController::class, 'post'])->name('site.post');
 Route::get('khach-hang', [LienheController::class, 'index'])->name('site.index');
-Route::get('gio-hang', [LienheController::class, 'index'])->name('site.index');
 
-//xử lý login
+
+//giỏ hàng
+Route::get('gio-hang', [CartController::class, 'index'])->name('gio-hang.index');
+route::get('AddCart/{id}', [CartController::class, 'AddCart'])->name('gio-hang.AddCart');
+route::get('DeleteCart/{id}', [CartController::class, 'DeleteCart'])->name('gio-hang.DeleteCart');
+
+//xử lý login admin
 Route::get('admin/login', [AuthController::class, 'getlogin'])->name('getlogin');
 Route::post('admin/login', [AuthController::class, 'postlogin'])->name('postlogin');
 Route::get('admin/logout', [AuthController::class, 'logout'])->name('logout');

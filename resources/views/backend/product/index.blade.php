@@ -1,5 +1,14 @@
 @extends('layouts.admin')
-@section('title','tất cả danh mục sản phẩm')
+@section('title','tất cả sản phẩm')
+@section('header')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+@endsection
+@section('footer')
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
+@endsection
 @section('conten')
 
 <div class="content-wrapper">
@@ -44,7 +53,7 @@
         </div>
         <div class="card-body">
           @includeIf('backend.message_alert')
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="myTable">
             <thead>
               <tr>
                 <th style="width:20px;" class="text-center">#</th>

@@ -97,47 +97,7 @@
           </p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-user"></i>
-          <p>
-          Khách hàng
-          </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-phone-alt"></i>
-          <p>
-          Liên hệ
-          </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-check-square"></i>
-          <p>
-          Hệ thống
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Cấu hình</p>
-            </a>
-          </li>
-        </ul>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Thành viên</p>
-            </a>
-          </li>
-        </ul>
-      </li>
+      
 <!--dưới-->
       <li class="nav-header">Tài Khoản</li>
       <li class="nav-item">
