@@ -79,28 +79,23 @@
                                     <td class="text-center">{{ $brand->created_at }}</td>
                                     <td class="text-center">
                                         @if ($brand->status == 1)
-                                            <a href="{{ route('brand.status', ['brand' => $brand->id]) }}"
-                                                class="ntn btn-sm btn-success">
-                                                <i class="fas fa-toggle-on"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('brand.status', ['brand' => $brand->id]) }}"
-                                                class="ntn btn-sm btn-danger">
-                                                <i class="fas fa-toggle-off"></i>
-                                            </a>
-                                        @endif
-                                        <a href="{{ route('brand.edit', ['brand' => $brand->id]) }}"
-                                            class="ntn btn-sm btn-info">
+                                        <a href="{{ route('brand.status', ['brand'=>$brand->id])}}" class="btn btn-sm btn-success">
+                                            <i class="fas fa-toggle-on"></i>
+                                          </a>
+                                          @else
+                                          <a href="{{ route('brand.status', ['brand'=>$brand->id])}}" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-toggle-off"></i>
+                                          </a>
+                                          @endif
+                                          <a href="{{ route('brand.edit', ['brand'=>$brand->id])}}" class="btn btn-sm btn-info">
                                             <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('brand.show', ['brand' => $brand->id]) }}"
-                                            class="ntn btn-sm btn-warning">
+                                          </a>
+                                          <a href="{{ route('brand.show', ['brand'=>$brand->id])}}" class="btn btn-sm btn-warning">
                                             <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('brand.delete', ['brand' => $brand->id]) }}"
-                                            class="ntn btn-sm btn-danger">
+                                          </a>
+                                          <a href="{{ route('brand.delete', ['brand'=>$brand->id])}}" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
-                                        </a>
+                                          </a>
                                     </td>
                                     <td class="text-center">{{ $brand->id }}</td>
                                 </tr>

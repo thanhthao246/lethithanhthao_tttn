@@ -26,6 +26,13 @@
         href="{{ asset('public/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed"
         href="{{ asset('public/images/ico/apple-touch-icon-57-precomposed.png') }}">
+    <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/elegant-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/slicknav.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
 </head>
 <!--/head-->
 
@@ -50,26 +57,45 @@
         </div>
         </div>
         <!--/header_top-->
-        <div class="header-middle">
-            <!--header-middle-->
-            <div class="container">
+        <div class="container">
+            <div class="inner-header">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html">
-                                <img src="{{ asset('public/images/home/logo100.png') }}"
-                                    style="width:290px;height:90px;"alt="" />
-                            </a>
+                            <a href="index.html"><img src="{{ asset('public/images/home/logo100.png') }}"
+                                    alt="" /></a>
                         </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-                                <li><a href="#"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                            </ul>
-                        </div>
+
+                    <div class="col-lg-7 text-right col-md-7">
+                        <ul class="nav-right">
+                            <li class="heart-icon"><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
+                            <li class="heart-icon"><a href="{{ route('postlogin') }}"><i class="fa fa-lock"></i> Đăng
+                                    nhập</a>
+                            </li>
+
+                            <li class="cart-icon"><a href="#">
+
+                                    <i class="fa fa-shopping-cart"></i> Giỏ hàng
+                                    <span>3</span>
+
+                                </a>
+                                <div class="cart-hover">
+                                    <div id="change-item-cart">
+                                        
+                                        <div class="select-total">
+                                            <span>total:</span>
+                                            <h5>₫120.00</h5>
+                                        </div>
+                                        <div class="select-button">
+                                            <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                                            <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -165,6 +191,13 @@
     <script src="{{ asset('public/js/price-range.js') }}"></script>
     <script src="{{ asset('public/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('public/js/main.js') }}"></script>
+    <script src="{{ asset('public/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.zoom.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.dd.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.slicknav.js') }}"></script>
     @yield('footer')
 </body>
 

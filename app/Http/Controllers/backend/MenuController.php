@@ -166,15 +166,15 @@ class MenuController extends Controller
         $html_sort_order = '';
         foreach ($list_menu as $item) {
             if ($menu->parent_id == $item->id) {
-                $html_parent_id = '<option selected value="' . $item->id . '">' . $item->name . '</option>';
+                $html_parent_id .= '<option selected value="' . $item->id . '">' . $item->name . '</option>';
             } else {
-                $html_parent_id = '<option value="' . $item->id . '">' . $item->name . '</option>';
+                $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
             }
 
             if ($menu->sort_order == $item->sort_order) {
-                $html_sort_order = '<option selected value="' . $item->sort_order . '">' . $item->name . '</option>';
+                $html_sort_order .= '<option selected value="' . $item->sort_order . '">' . $item->name . '</option>';
             } else {
-                $html_sort_order = '<option value="' . $item->sort_order . '">' . $item->name . '</option>';
+                $html_sort_order .= '<option value="' . $item->sort_order . '">' . $item->name . '</option>';
             }
         }
         return view('backend.menu.edit', compact('menu', 'html_parent_id', 'html_sort_order'));

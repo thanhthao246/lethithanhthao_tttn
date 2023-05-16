@@ -79,28 +79,23 @@
                                     <td class="text-center">{{ $category->created_at }}</td>
                                     <td class="text-center">
                                         @if ($category->status == 1)
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
-                                                class="ntn btn-sm btn-success">
-                                                <i class="fas fa-toggle-on"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('category.status', ['category' => $category->id]) }}"
-                                                class="ntn btn-sm btn-danger">
-                                                <i class="fas fa-toggle-off"></i>
-                                            </a>
-                                        @endif
-                                        <a href="{{ route('category.edit', ['category' => $category->id]) }}"
-                                            class="ntn btn-sm btn-info">
+                                        <a href="{{ route('category.status', ['category'=>$category->id])}}" class="btn btn-sm btn-success">
+                                            <i class="fas fa-toggle-on"></i>
+                                          </a>
+                                          @else
+                                          <a href="{{ route('category.status', ['category'=>$category->id])}}" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-toggle-off"></i>
+                                          </a>
+                                          @endif
+                                          <a href="{{ route('category.edit', ['category'=>$category->id])}}" class="btn btn-sm btn-info">
                                             <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('category.show', ['category' => $category->id]) }}"
-                                            class="ntn btn-sm btn-warning">
+                                          </a>
+                                          <a href="{{ route('category.show', ['category'=>$category->id])}}" class="btn btn-sm btn-warning">
                                             <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('category.delete', ['category' => $category->id]) }}"
-                                            class="ntn btn-sm btn-danger">
+                                          </a>
+                                          <a href="{{ route('category.delete', ['category'=>$category->id])}}" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
-                                        </a>
+                                          </a>
                                     </td>
                                     <td class="text-center">{{ $category->id }}</td>
                                 </tr>

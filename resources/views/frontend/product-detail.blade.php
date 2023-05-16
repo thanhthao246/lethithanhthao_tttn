@@ -29,11 +29,11 @@
                 @endif
             </div>
             <div class="col-md-6">
-                <h2>{{ $product->name }}</h2>
-                <h3>Giá:{{ number_format($product->price_buy) }} vnđ</h3>
+                <h3>{{ $product->name }}</h3>
+                <h4>Giá:{{ number_format($product->price_buy) }} vnđ</h4>
             </div>
             <label>Số lượng:</label>
-            <input type="text" value="3" />
+            <input type="text" value="3" /><br>
             <button type="button" class="btn btn-fefault cart">
                 <i class="fa fa-shopping-cart"></i>
                 Thêm vào giỏ hàng
@@ -72,7 +72,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <strong>
-                                            <span class="price">{{ $row_pro->price_buy }} vnđ</span>
+                                            <span class="price">{{ $row_pro->price_buy }} VNĐ</span>
                                         </strong>
                                     </div>
                                     <div class="col-ms-2 text-center"><br>
@@ -89,4 +89,3 @@
         @endif
     </div>
 @endsection
-

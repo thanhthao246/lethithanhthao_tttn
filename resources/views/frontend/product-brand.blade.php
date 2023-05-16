@@ -38,10 +38,10 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <h3 class="product-name">
+                                    <h5 class="product-name">
                                         <a
                                             href="{{ route('slug.home', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
-                                    </h3>
+                                    </h5>
                                     <div class="product-price">
                                         <div class="row">
                                             <div class="col-md-9">

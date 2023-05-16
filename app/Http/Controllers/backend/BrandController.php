@@ -28,13 +28,11 @@ class BrandController extends Controller
     public function create()
     {
         $list_brand = Brand::where('status', '!=', 0)->get();
-        $html_parent_id = '';
         $html_sort_order = '';
         foreach ($list_brand as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
             $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
         }
-        return view('backend.brand.create', compact('html_parent_id', 'html_sort_order'));
+        return view('backend.brand.create', compact( 'html_sort_order'));
     }
 
     /**
@@ -47,20 +45,20 @@ class BrandController extends Controller
         $brand->slug = Str::slug($brand->name = $request->name, '-');
         $brand->metakey = $request->metakey;
         $brand->metadesc = $request->metadesc;
-        $brand->sort_order = $request->sort_order;
+        // $brand->sort_order = $request->sort_order;
         $brand->created_at = date('Y-m-d H:i:s');
         $brand->created_by = 1;
         $brand->status = $request->status;
-        // upload file
-        if ($request->has('image')) {
-            $path_dir = "public/images/brand/";
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $brand->slug . '.' . $extension;
-            $file->move($path_dir, $filename);
-            $brand->image = $filename;
-        }
-        // end upload file  
+        // // upload file
+        // if ($request->has('image')) {
+        //     $path_dir = "public/images/brand/";
+        //     $file = $request->file('image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = $brand->slug . '.' . $extension;
+        //     $file->move($path_dir, $filename);
+        //     $brand->image = $filename;
+        // }
+        // // end upload file  
         if ($brand->save()) //lưu vào csdl
         {
             $link = new Link();
