@@ -10,5 +10,7 @@
 @section('content')
 @foreach ($product_list as $item)
     {{$item->name}}
+    //mới có tên sản phẩm
+    
 @endforeach
 @endsection

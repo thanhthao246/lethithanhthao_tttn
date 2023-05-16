@@ -198,4 +198,11 @@ class SiteController extends Controller
             ->paginate(9);
         return view('frontend.post', compact('post_list'));
     }
+    public function timkiem(Request $req)
+    {
+        $product = Product::where('lttt_product.name', 'like', '%' . $req->keywords . '%')
+            ->orWhere('price_buy', $req->keywords)
+            ->get();
+        return view('frontend.tim-kiem', compact('product'));
+    }
 }

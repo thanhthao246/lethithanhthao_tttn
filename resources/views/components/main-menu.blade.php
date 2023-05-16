@@ -38,15 +38,13 @@
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <form action="{{ URL::to('/tim-kiem') }}" method="POST">
+                        <form action="{{ route('site.timkiem') }}" method="GET">
                             {{ csrf_field() }}
                             <div class="search_box pull-right">
-                                <input type="text" name="keywords_submit" id="keywords"
-                                    placeholder="Tìm kiếm sản phẩm" />
-                                <input type="submit" style="margin-top:0;color:#666" name="search_items"
-                                    class="btn btn-primary btn-sm" value="Tìm kiếm">
-                                <div id="search_ajax"></div>
-
+                                <input type="text" name="keywords" id="keys"
+                                    placeholder="Tìm kiếm sản phẩm..." />
+                                <button class="btn btn-primary fa fa-search" style="margin-top:0" type="submit"
+                                    id="searchsubmit"></button>
                             </div>
                         </form>
                     </div>

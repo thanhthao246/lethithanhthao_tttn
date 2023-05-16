@@ -24,6 +24,7 @@ Route::get('san-pham', [SiteController::class, 'product'])->name('site.product')
 Route::get('thuong-hieu', [SiteController::class, 'brand'])->name('site.brand');
 Route::get('bai-viet', [SiteController::class, 'post'])->name('site.post');
 Route::get('khach-hang', [LienheController::class, 'index'])->name('site.index');
+Route::get("/tim-kiem", [siteController::class, 'timkiem'])->name('site.timkiem');
 
 
 //giỏ hàng
