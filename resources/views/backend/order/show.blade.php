@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table table-bordered">
             <tr>
               <th>Tên trường</th>
               <th>Giá trị</th>

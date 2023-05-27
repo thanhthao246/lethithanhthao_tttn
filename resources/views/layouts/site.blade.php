@@ -51,7 +51,6 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -66,27 +65,49 @@
                                     alt="" /></a>
                         </div>
                     </div>
-
                     <div class="col-lg-7 text-right col-md-7">
                         <ul class="nav-right">
                             <li class="heart-icon"><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
                             <li class="heart-icon"><a href="{{ route('postlogin') }}"><i class="fa fa-lock"></i> Đăng
                                     nhập</a>
                             </li>
-
                             <li class="cart-icon"><a href="#">
-
                                     <i class="fa fa-shopping-cart"></i> Giỏ hàng
-                                    <span>3</span>
-
+                                    @if(Session::has("Cart") != null)
+									<span id="total-quanty-show">{{Session::get("Cart")->totalQuanty}}</span>
+									@else
+									<span id="total-quanty-show">0</span>
+									@endif
                                 </a>
                                 <div class="cart-hover">
                                     <div id="change-item-cart">
-                                        
-                                        <div class="select-total">
-                                            <span>total:</span>
-                                            <h5>₫120.00</h5>
+                                    @if (Session::has("Cart") != null)
+                                        <div class="select-items">
+                                            <table>
+                                                <tbody>                                                  
+                                                    @foreach (Session::get("Cart")->products as $item)
+                                                        <tr>
+                                                            <td class="si-pic"><img src="{{ asset('images/product/') }}" alt="">
+                                                            </td>
+                                                            <td class="si-text">
+                                                                <div class="product-selected">
+                                                                    <p>{{ number_format($item['productinfo']->price_buy) }} đ x {{ $item['qty'] }}</p>
+                                                                    <h6>{{ $item['productinfo']->name }}</h6>
+                                                                </div>
+                                                            </td>
+                                                            <td class="si-close">
+                                                                <i class="ti-close"></i>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
+                                        <div class="select-total">
+                                            <span>Quả</span>
+                                            <h5>{{number_format(Session::get("Cart")->totalPrice_buy)}}  đ</h5>
+                                        </div>
+                                    @endif
                                         <div class="select-button">
                                             <a href="#" class="primary-btn view-card">VIEW CARD</a>
                                             <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
@@ -94,7 +115,6 @@
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -108,7 +128,22 @@
     <section class="maincontent">
         @yield('content')
     </section>
-
+    <div class="container">
+        <div class="row">
+            <div class="item col-md-6 mb-6">
+                <div class="thumb effect-animate-flash">
+                    <img src="{{ asset('public/images/home/hinh50.jpg') }}" alt="Image" width="571"
+                        height="210">
+                </div>
+            </div>
+            <div class="item col-md-6 mb-6">
+                <div class="thumb effect-animate-flash">
+                    <img src="{{ asset('public/images/home/hinh51.jpg') }}" alt="Image" width="571"
+                        height="210">
+                </div>
+            </div>
+        </div>
+    </div>
     <footer id="footer">
         <!--Footer-->
 
@@ -182,9 +217,6 @@
 
     </footer>
     <!--/Footer-->
-
-
-
     <script src="{{ asset('public/js/jquery.js') }}"></script>
     <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.scrollUp.min.js') }}"></script>
@@ -198,7 +230,48 @@
     <script src="{{ asset('public/js/jquery.zoom.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.dd.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.slicknav.js') }}"></script>
-    @yield('footer')
-</body>
 
+    	<!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+	<!-- JavaScript -->
+
+<script>
+        function AddCart(id) {
+            $.ajax({
+                url: 'AddCart/' + id,
+                type: 'GET',
+            }).done(function(response) {
+                RenderCart(response);
+                alertify.success("Đã thêm sản phẩm mới")
+            });
+        }
+
+        function RenderCart(response){
+        // console.log(response)
+        if (response)
+        {
+            $("#change-item-cart").empty();
+            $("#change-item-cart").html(response);
+            console.log($("#total-quanty-cart"));
+            $("#total-quanty-show").text($("#total-quanty-cart").val());
+        }
+        else
+        {
+            $("#change-item-cart").empty();
+            $("#total-quanty-show").text('0')
+        }
+		}
+    </script>
+</body>
+    @yield('footer')
+    <!--/jS-->
 </html>

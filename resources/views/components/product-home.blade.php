@@ -33,7 +33,7 @@
                                 </strong>
                             </div>
                             <div class="col-ms-2 text-center"><br>
-                                <a href="{{route('gio-hang.AddCart',['id'=>$product->id])}}" class="btn btn-default add-to-cart">
+                                <a onclick="AddCart({{$product->id}})" href="javascript:" class="btn btn-default add-to-cart">
                                     <i class="fa fa-shopping-cart" aria-hidden="true">Thêm giỏ hàng</i>
                                 </a>
 

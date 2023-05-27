@@ -115,23 +115,39 @@ class ProductController extends Controller
         if ($product == null) {
             return redirect()->route('product.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
         } else {
-            return view('backend.product.show', compact('category'));
+            return view('backend.product.show', compact('product'));
         }
     }
-
+    #GET:admin/product/edit/1
     public function edit($id)
     {
         $product = Product::find($id);
-        $list_product = Product::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
-        $html_parent_id = '';
-        $html_sort_order = '';
-        foreach ($list_product as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+        $list_product = Product::where('status', '!=', 0)->get();
+        $list_category = Category::where('status', '!=', 0)->get();
+        $list_brand = Brand::where('status', '!=', 0)->get();
+        $html_category_id = '';
+        $html_brand_id = '';
+        foreach ($list_category as $item) {
+            $html_category_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
         }
-        return view('backend.product.edit', compact('category', 'html_parent_id', 'html_sort_order'));
+        foreach ($list_brand as $item) {
+            $html_brand_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+        }
+        return view('backend.product.edit', compact('product', 'html_category_id', 'html_brand_id'));
     }
-
+    // public function edit($id)
+    // {
+    //     $product = Product::find($id);
+    //     $list_product = Product::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
+    //     $html_parent_id = '';
+    //     $html_sort_order = '';
+    //     foreach ($list_product as $item) {
+    //         $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
+    //         $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+    //     }
+    //     return view('backend.product.edit', compact('product', 'html_parent_id', 'html_sort_order'));
+    // }
+    #GET:admin/product/update/1
     public function update(ProductUpdateRequest $request, $id)
     {
         $product = Product::find($id);
@@ -162,57 +178,116 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        //lấy ra thông tin tấm hình cần xóa
-        $path_dir = "images/product/";
-        $path_image_delete = ($path_dir . $product->image);
-        //end
         if ($product == null) {
-            return redirect()->route('product.trash')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('product.trash')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         if ($product->delete()) {
-            if (File::exists($path_image_delete)) {
-                File::delete($path_image_delete);
-            }
-        } //lưu vào dữ liệu
-        return redirect()->route('product.trash')->with('message', ['type' => 'success', 'msg' => ' Xóa mẫu tin không thành công !']);
+            return redirect()->route('product.trash')->with('message', [
+                'type' => 'success',
+                'msg' => 'Xóa mẫu tin thành công!'
+            ]);
+        }
+        return redirect()->route('product.trash')->with('message', [
+            'type' => 'danger',
+            'msg' => 'Xóa không thành công!'
+        ]);
     }
+    // public function destroy($id)
+    // {
+    //     $product = Product::find($id);
+    //     if ($product == null) {
+    //         return redirect()->route('product.trash')->with('message', [
+    //             'type' => 'danger',
+    //             'msg' => 'Mẫu tin không tồn tại!'
+    //         ]);
+    //     }
+    //     if ($product->delete()) {
+    //         return redirect()->route('product.trash')->with('message', [
+    //             'type' => 'success',
+    //             'msg' => 'Xóa mẫu tin thành công!'
+    //         ]);
+    //     }
+    //     return redirect()->route('product.trash')->with('message', [
+    //         'type' => 'danger',
+    //         'msg' => 'Xóa không thành công!'
+    //     ]);
+    //}
     #GET:admin/product/status/1
     public function status($id)
     {
         $product = Product::find($id);
         if ($product == null) {
-            return redirect()->route('product.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('product.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $product->status = ($product->status == 1) ? 2 : 1;
         $product->updated_at = date('Y-m-d H:i:s');
         $product->updated_by = 1;
         $product->save();
-        return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => 'Thay đổi trạng thái thành công!']);
+        return redirect()->route('product.index')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Thay đổi trạng thái thành công!'
+        ]);
     }
     #GET:admin/product/delete/1
     public function delete($id)
     {
         $product = Product::find($id);
         if ($product == null) {
-            return redirect()->route('product.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('product.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $product->status = 0;
         $product->updated_at = date('Y-m-d H:i:s');
         $product->updated_by = 1;
         $product->save();
-        return redirect()->route('product.index')->with('message', ['type' => 'success', 'msg' => 'Xóa vào thùng rác thành công!']);
+        return redirect()->route('product.index')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Đưa vào thùng rác thành công!'
+        ]);
     }
+    // public function delete($id)
+    // {
+    //     $product = Product::find($id);
+    //     if ($product == null) {
+    //         return redirect()->route('product.index')->with('message', [
+    //             'type' => 'danger',
+    //             'msg' => 'Mẫu tin không tồn tại!'
+    //         ]);
+    //     }
+    //     $product->status = 0;
+    //     $product->updated_at = date('Y-m-d H:i:s');
+    //     $product->updated_by = 1;
+    //     $product->save();
+    //     return redirect()->route('product.index')->with('message', [
+    //         'type' => 'sucess',
+    //         'msg' => 'Đưa vào thùng rác thành công!'
+    //     ]);
+    // }
     #GET:admin/product/restore
     public function restore($id)
     {
         $product = Product::find($id);
         if ($product == null) {
-            return redirect()->route('product.trash')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('product.trash')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $product->status = 2;
         $product->updated_at = date('Y-m-d H:i:s');
         $product->updated_by = 1;
         $product->save();
-        return redirect()->route('product.trash')->with('message', ['type' => 'success', 'msg' => 'Khôi phục mẫu tin thành công!']);
+        return redirect()->route('product.trash')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Thay đổi trạng thái thành công!'
+        ]);
     }
 }

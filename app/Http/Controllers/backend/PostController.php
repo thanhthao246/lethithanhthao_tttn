@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\backend;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Topic;
 
 
 use App\Http\Requests\PostStoreRequest;
@@ -17,167 +15,188 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    #GET: admin/post, admin/post/index
     public function index()
     {
         $list_post = Post::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
         return view('backend.post.index', compact('list_post'));
     }
-    #GET:admin/post/trash
     public function trash()
     {
         $list_post = Post::where('status', '=', 0)->orderBy('created_at', 'desc')->get();
         return view('backend.post.trash', compact('list_post'));
     }
-    #GET: admin/post/create, admin/post/create
     public function create()
     {
+        $list_top = Topic::where('status', '!=', 0)->get();
         $list_post = Post::where('status', '!=', 0)->get();
-        $html_parent_id = '';
-        $html_sort_order = '';
-        foreach ($list_post as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+        $html_top_id = '';
+        foreach ($list_top as $item) {
+            $html_top_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
         }
-        return view('backend.post.create', compact('html_parent_id', 'html_sort_order'));
+        return view('backend.post.create', compact('html_top_id'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(PostStoreRequest $request)
     {
-        $post = new Category; //tạo mới
-        $post->name = $request->name;
-        $post->slug = Str::slug($post->name = $request->name, '-');
+        $post = new post; // tạo mới
+        $post->title = $request->title;
+        $post->slug = Str::slug($post->title = $request->title, '-');
+        $post->detail = $request->detail;
+        $post->top_id = $request->top_id;
         $post->metakey = $request->metakey;
         $post->metadesc = $request->metadesc;
-        $post->parent_id = $request->parent_id;
-        $post->sort_order = $request->sort_order;
+        $post->type = 'post';
         $post->status = $request->status;
         $post->created_at = date('Y-m-d H:i:s');
         $post->created_by = 1;
-        //upload file
+        //Upload file
         if ($request->has('image')) {
-            $path_dir = "public/images/post/";
-            if (File::exists(public_path($path_dir . $post->image))) {
-                File::delete(public_path($path_dir . $post->image));
-            }
+            $path_dir = "images/post"; // nơi lưu trữ
             $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $post->slug . '.' . $extension;
+            $extension = $file->getClientOriginalExtension(); // lấy phần mở rộng của tập tin 
+            $filename = $post->slug . '.' . $extension; // lấy tên slug  + phần mở rộng 
             $file->move($path_dir, $filename);
             $post->image = $filename;
-        }
-        // end upload file
-        $post->save();
-        return redirect()->route('post.index')->with('message', ['type' => 'success', 'msg' => ' Thêm mẫu tin thành công !']);
-    }
+            $post->save();
 
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'success',
+                'msg' => 'Thêm mẫu tin thành công!'
+            ]);
+        }
+        // End upload 
+
+
+
+        return redirect()->route('post.index')->with('message', [
+            'type' => 'danger',
+            'msg' => 'Thêm không thành công!'
+        ]);
+    }
     public function show($id)
     {
         $post = Post::find($id);
         if ($post == null) {
-            return redirect()->route('post.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         } else {
-            return view('backend.post.show', compact('category'));
+            return view('backend.post.show', compact('post'));
         }
     }
-
     public function edit($id)
     {
         $post = Post::find($id);
-        $list_post = Post::where('status', '!=', 0)->orderBy('created_at', 'desc')->get();
-        $html_parent_id = '';
-        $html_sort_order = '';
-        foreach ($list_post as $item) {
-            $html_parent_id .= '<option value="' . $item->id . '">' . $item->name . '</option>';
-            $html_sort_order .= '<option value="' . $item->sort_order . '">Sau: ' . $item->name . '</option>';
+        $list_top = Topic::where('status', '!=', 0)->get();
+        $list_post = Post::where('status', '!=', 0)->get();
+        $html_top_id = '';
+        foreach ($list_top as $item) {
+            $html_top_id .= '<option value="' . $item->id . '">' . $item->title . '</option>';
         }
-        return view('backend.post.edit', compact('category', 'html_parent_id', 'html_sort_order'));
-    }
 
+        return view('backend.post.edit', compact('post', 'html_top_id'));
+    }
     public function update(PostUpdateRequest $request, $id)
     {
-        $post = Post::find($id);
-        $post->name = $request->name;
-        $post->slug = Str::slug($post->name = $request->name, '-');
+        $post = Post::find($id); //lấy mẫu tin sau đó cập nhật
+        $post->title = $request->title;
+        $post->slug = Str::slug($post->title = $request->title, '-');
         $post->metakey = $request->metakey;
         $post->metadesc = $request->metadesc;
-        $post->parent_id = $request->parent_id;
-        $post->sort_order = $request->sort_order;
+        $post->top_id = $request->top_id;
         $post->status = $request->status;
         $post->updated_at = date('Y-m-d H:i:s');
         $post->updated_by = 1;
-        //upload images
-        if ($request->has('image')) {
-            $path_dir = "images/post/";
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $post->slug . "." . $extension;
-            $file->move($path_dir, $filename);
-            $post->image = $filename;
+        if ($post->save()) {
+            // $link = Link::where([['type','=','post'],['table_id','=',$id]])->first();
+            // $link->slug=Str::slug($post->title=$request->title,'-');
+            // $link->save();
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'success',
+                'msg' => 'Thêm mẫu tin thành công!'
+            ]);
+        } else {
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Thêm không thành công!'
+            ]);
         }
-
-        //end
-        $post->save();
-        return redirect()->route('post.index')->with('message', ['type' => 'success', 'msg' => ' Thêm mẫu ti không thành công !']);
     }
-    #GET:admin/post/destroy/1
     public function destroy($id)
     {
         $post = Post::find($id);
-        //lấy ra thông tin tấm hình cần xóa
-        $path_dir = "images/post/";
-        $path_image_delete = ($path_dir . $post->image);
-        //end
         if ($post == null) {
-            return redirect()->route('post.trash')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('post.trash')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         if ($post->delete()) {
-            if (File::exists($path_image_delete)) {
-                File::delete($path_image_delete);
-            }
-        } //lưu vào dữ liệu
-        return redirect()->route('post.trash')->with('message', ['type' => 'success', 'msg' => ' Xóa mẫu tin không thành công !']);
+
+            return redirect()->route('post.trash')->with('message', [
+                'type' => 'success',
+                'msg' => 'Xóa mẫu tin thành công!'
+            ]);
+        }
+        return redirect()->route('post.trash')->with('message', [
+            'type' => 'danger',
+            'msg' => 'Xóa không thành công!'
+        ]);
     }
-    #GET:admin/post/status/1
+    // admin post/status/1  
     public function status($id)
     {
         $post = Post::find($id);
         if ($post == null) {
-            return redirect()->route('post.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $post->status = ($post->status == 1) ? 2 : 1;
         $post->updated_at = date('Y-m-d H:i:s');
         $post->updated_by = 1;
         $post->save();
-        return redirect()->route('post.index')->with('message', ['type' => 'success', 'msg' => 'Thay đổi trạng thái thành công!']);
+        return redirect()->route('post.index')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Thay đổi trạng thái thành công!'
+        ]);
     }
-    #GET:admin/post/delete/1
+    //admin post/delete/1
     public function delete($id)
     {
         $post = Post::find($id);
         if ($post == null) {
-            return redirect()->route('post.index')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('post.index')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $post->status = 0;
         $post->updated_at = date('Y-m-d H:i:s');
         $post->updated_by = 1;
         $post->save();
-        return redirect()->route('post.index')->with('message', ['type' => 'success', 'msg' => 'Xóa vào thùng rác thành công!']);
+        return redirect()->route('post.index')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Đưa vào thùng rác thành công!'
+        ]);
     }
-    #GET:admin/post/restore
     public function restore($id)
     {
         $post = Post::find($id);
         if ($post == null) {
-            return redirect()->route('post.trash')->with('message', ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại!']);
+            return redirect()->route('post.trash')->with('message', [
+                'type' => 'danger',
+                'msg' => 'Mẫu tin không tồn tại!'
+            ]);
         }
         $post->status = 2;
         $post->updated_at = date('Y-m-d H:i:s');
         $post->updated_by = 1;
         $post->save();
-        return redirect()->route('post.trash')->with('message', ['type' => 'success', 'msg' => 'Khôi phục mẫu tin thành công!']);
+        return redirect()->route('post.trash')->with('message', [
+            'type' => 'sucess',
+            'msg' => 'Thay đổi trạng thái thành công!'
+        ]);
     }
 }
