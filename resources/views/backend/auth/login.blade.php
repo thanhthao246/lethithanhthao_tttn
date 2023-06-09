@@ -62,22 +62,14 @@
                                                 </label>
                                             </div>
                                         </div>
+
                                         <!-- /.col -->
-                                        <div class="col-4">
-                                            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-                                        </div>
-                                        <!-- /.col -->
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                                     </div>
                                 </form>
 
-                                <div class="social-auth-links text-center mt-2 mb-3">
-                                    <a href="#" class="btn btn-block btn-primary">
-                                        <i class="fab fa-facebook mr-2"></i> Đăng nhập bằng Facebook
-                                    </a>
-                                    <a href="#" class="btn btn-block btn-danger">
-                                        <i class="fab fa-google-plus mr-2"></i> Đăng nhập bằng Google+
-                                    </a>
-                                </div>
                                 <!-- /.social-auth-links -->
 
                                 <p class="mb-1">

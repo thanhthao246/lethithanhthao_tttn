@@ -413,11 +413,11 @@ ol {
 }
 
 .inner-header {
-	padding: 39px 0;
+	padding: 0px;
 }
 
 .inner-header .logo {
-	padding: 12px 0;
+	padding: 10px 0;
 }
 
 .inner-header .logo a {
@@ -1149,6 +1149,7 @@ ol {
 	width: 30px;
 	background: #252525;
 	border-radius: 50px;
+	display: none;
 }
 
 .product-item {

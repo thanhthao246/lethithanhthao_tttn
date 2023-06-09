@@ -12,7 +12,9 @@
                         
                     @endphp
                     <tr>
-                        <td class="si-pic"><img src="{{ asset('images/product/') }}" alt="">
+                        {{-- <td class="si-pic"><img src="{{ asset('images/product/') }}" alt="">
+                        </td> --}}
+                        <td class="si-pic"><img src="{{ asset('images/product/' . $hinh) }}" alt="{{ $hinh }}">
                         </td>
                         <td class="si-text">
                             <div class="product-selected">
@@ -21,7 +23,8 @@
                             </div>
                         </td>
                         <td class="si-close">
-                            <i class="ti-close"></i>
+                            <i class="glyphicon glyphicon-remove" data-id="{{ $item['productinfo']->id }}"></i>
+                            {{-- <i class="ti-close" data-id="{{ $item['productinfo']->id }}"></i> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -29,7 +32,7 @@
         </table>
     </div>
     <div class="select-total">
-        <span>Quả</span>
+        <span>Giá: </span>
         <h5>{{ number_format(Session::get('Cart')->totalPrice_buy) }} đ</h5>
         <input hidden id="total-quanty-cart" type="number" value="{{ Session::get('Cart')->totalQuanty }}">
     </div>

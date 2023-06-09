@@ -33,7 +33,7 @@
                 <h4>Giá:{{ number_format($product->price_buy) }} vnđ</h4>
             </div>
             <label>Số lượng:</label>
-            <input type="text" value="3" /><br>
+            <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="1">
             <button type="button" class="btn btn-fefault cart">
                 <i class="fa fa-shopping-cart"></i>
                 Thêm vào giỏ hàng

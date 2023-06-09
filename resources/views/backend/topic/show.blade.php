@@ -32,14 +32,14 @@
 
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ route('topic.edit', ['topic' => $topic->id]) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('topic.edit', ['topic' => $topic->id]) }}" class="btn btn-sm btn-success">
                                 <i class="fas fa-edit"></i>Sửa
                             </a>
                             <a href="{{ route('topic.delete', ['topic' => $topic->id]) }}" class="btn btn-sm btn-danger">
-                                <i class="fas fa-delete"></i>Xóa
+                                <i class="fas fa-trash"></i>Xóa
                             </a>
                             <a href="{{ route('topic.index') }}" class="btn btn-sm btn-info">
-                                <i class="fas fa-trash"></i> Quay về danh sách
+                                <i class="fas fa-reply"></i> Quay về danh sách
                             </a>
                         </div>
                     </div>

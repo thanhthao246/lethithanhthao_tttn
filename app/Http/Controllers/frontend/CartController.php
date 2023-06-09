@@ -4,7 +4,10 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App
+use App\Cart;
+use App\Models\Product;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {

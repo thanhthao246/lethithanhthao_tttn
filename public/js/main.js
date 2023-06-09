@@ -29,22 +29,41 @@ $(document).ready(function () {
 	});
 });
 //carousel product-home
-$(document).ready(function(){
+$(document).ready(function () {
 	$('.owl-carousel').owlCarousel({
-	  loop:true,
-	  margin:10,
-	  nav:true,
-	  responsive:{
-		  0:{
-			  items:1
-		  },
-		  600:{
-			  items:3
-		  },
-		  1000:{
-			  items:5
-		  }
-	  }
-  })
-  });
-  
+		loop: true,
+		margin: 10,
+		nav: true,
+		responsive: {
+			0: {
+				items: 1
+			},
+			600: {
+				items: 3
+			},
+			1000: {
+				items: 5
+			}
+		}
+	})
+});
+
+//
+var proQty = $('.pro-qty');
+proQty.prepend('<span class="dec qtybtn">-</span>');
+proQty.append('<span class="inc qtybtn">+</span>');
+proQty.on('click', '.qtybtn', function () {
+	var $button = $(this);
+	var oldValue = $button.parent().find('input').val();
+	if ($button.hasClass('inc')) {
+		var newVal = parseFloat(oldValue) + 1;
+	} else {
+		// Don't allow decrementing below zero
+		if (oldValue > 0) {
+			var newVal = parseFloat(oldValue) - 1;
+		} else {
+			newVal = 0;
+		}
+	}
+	$button.parent().find('input').val(newVal);
+});

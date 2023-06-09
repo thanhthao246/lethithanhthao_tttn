@@ -12,25 +12,40 @@ use App\Http\Controllers\backend\MenuController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\AuthController;
-use App\Http\Controllers\backend\CartController;
+use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\ContactController;
+use App\Http\Controllers\frontend\DangNhapController;
 
 //file này bị thay đổi
 //nhập message cho commit
 //nhấn commit
 
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
-Route::get('lien-he', [LienheController::class, 'index'])->name('site.index');
 Route::get('san-pham', [SiteController::class, 'product'])->name('site.product');
 Route::get('thuong-hieu', [SiteController::class, 'brand'])->name('site.brand');
 Route::get('bai-viet', [SiteController::class, 'post'])->name('site.post');
 Route::get('khach-hang', [LienheController::class, 'index'])->name('site.index');
 Route::get("/tim-kiem", [siteController::class, 'timkiem'])->name('site.timkiem');
 
+//liên hệ
+Route::get('lien-he',[ContactController::class,'index'])->name('frontend.contact');
+Route::post('lien-he',[ContactController::class,'postcontact'])->name('contact.postcontact');
 
 //giỏ hàng
 Route::get('gio-hang', [CartController::class, 'index'])->name('gio-hang.index');
 route::get('AddCart/{id}', [CartController::class, 'AddCart'])->name('gio-hang.AddCart');
+Route::get('list-cart', [CartController::class, 'ListCart'])->name('gio-hang.list-cart');
 route::get('DeleteCart/{id}', [CartController::class, 'DeleteCart'])->name('gio-hang.DeleteCart');
+Route::get('Delete-List-Cart/{id}',[CartController::class,'DeleteListCart']);
+Route::get('Save-List-Cart/{id}/{quanty}',[CartController::class,'SaveListCart']);
+
+//đăng ký và đăng nhập 
+//đăng ký
+Route::get('dang-ky',[DangNhapController::class,'dangky'])->name('login.dangky');
+Route::post('dang-ky',[DangNhapController::class,'xulydangky'])->name('login.xulidangky');
+//đăng nhập
+
+
 
 //xử lý login admin
 Route::get('admin/login', [AuthController::class, 'getlogin'])->name('getlogin');

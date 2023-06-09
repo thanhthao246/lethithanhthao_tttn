@@ -8,14 +8,23 @@
     <meta name="author" content="">
     <title>@yield('title')</title>
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> --}}
     <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/prettyPhoto.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/elegant-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/slicknav.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
+
+
+
     @yield('header')
     <link rel="shortcut icon" href="{{ asset('public/images/ico/favicon.ico') }}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
@@ -26,13 +35,12 @@
         href="{{ asset('public/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed"
         href="{{ asset('public/images/ico/apple-touch-icon-57-precomposed.png') }}">
-    <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/themify-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/elegant-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/nice-select.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/jquery-ui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/slicknav.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        #change-item-cart table tbody tr td img {
+            width: 100px;
+        }
+    </style>
 </head>
 <!--/head-->
 
@@ -57,12 +65,12 @@
         </div>
         <!--/header_top-->
         <div class="container">
-            <div class="inner-header">
+            <div class="inner-header" style="padding: 0px">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="{{ asset('public/images/home/logo100.png') }}"
-                                    alt="" /></a>
+                            <a href="#" style="width: 400px" ;><img
+                                    src="{{ asset('public/images/home/logo100.png') }}" alt="" /></a>
                         </div>
                     </div>
                     <div class="col-lg-7 text-right col-md-7">
@@ -73,46 +81,63 @@
                             </li>
                             <li class="cart-icon"><a href="#">
                                     <i class="fa fa-shopping-cart"></i> Giỏ hàng
-                                    @if(Session::has("Cart") != null)
-									<span id="total-quanty-show">{{Session::get("Cart")->totalQuanty}}</span>
-									@else
-									<span id="total-quanty-show">0</span>
-									@endif
+                                    @if (Session::has('Cart') != null)
+                                        <span id="total-quanty-show">{{ Session::get('Cart')->totalQuanty }}</span>
+                                    @else
+                                        <span id="total-quanty-show">0</span>
+                                    @endif
                                 </a>
                                 <div class="cart-hover">
                                     <div id="change-item-cart">
-                                    @if (Session::has("Cart") != null)
-                                        <div class="select-items">
-                                            <table>
-                                                <tbody>                                                  
-                                                    @foreach (Session::get("Cart")->products as $item)
-                                                        <tr>
-                                                            <td class="si-pic"><img src="{{ asset('images/product/') }}" alt="">
-                                                            </td>
-                                                            <td class="si-text">
-                                                                <div class="product-selected">
-                                                                    <p>{{ number_format($item['productinfo']->price_buy) }} đ x {{ $item['qty'] }}</p>
-                                                                    <h6>{{ $item['productinfo']->name }}</h6>
-                                                                </div>
-                                                            </td>
-                                                            <td class="si-close">
-                                                                <i class="ti-close"></i>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="select-total">
-                                            <span>Quả</span>
-                                            <h5>{{number_format(Session::get("Cart")->totalPrice_buy)}}  đ</h5>
+                                        @if (Session::has('Cart') != null)
+                                            <div class="select-items">
+                                                <table>
+                                                    <tbody>
+                                                        @foreach (Session::get('Cart')->products as $item)
+                                                            @php
+                                                                $product_image = $item['img'];
+                                                                $hinh = null;
+                                                                if (count($product_image) > 0) {
+                                                                    $hinh = $product_image[0]['image'];
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td class="si-pic"><img
+                                                                        src="{{ asset('images/product/' . $hinh) }}"
+                                                                        alt="{{ $hinh }}">
+                                                                </td>
+                                                                <td class="si-text">
+                                                                    <div class="product-selected">
+                                                                        <p>{{ number_format($item['productinfo']->price_buy) }}
+                                                                            đ x {{ $item['qty'] }}</p>
+                                                                        <h6>{{ $item['productinfo']->name }}</h6>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="si-close">
+                                                                    <i class="glyphicon glyphicon-remove"
+                                                                        data-id="{{ $item['productinfo']->id }}"></i>
+                                                                    {{-- <i class="fa fas-close"
+                                                                        data-id="{{ $item['productinfo']->id }}"></i> --}}
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="select-total">
+                                                <span>Tổng giá: </span>
+                                                <h5>{{ number_format(Session::get('Cart')->totalPrice_buy) }} đ</h5>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    @if (Session::has('Cart') != null)
+                                        <div class="select-button">
+                                            <a href="{{ route('gio-hang.list-cart') }}"
+                                                class="primary-btn view-card">XEM
+                                                GIỎ HÀNG</a>
+                                            <a href="#" class="primary-btn checkout-btn">THANH TOÁN</a>
                                         </div>
                                     @endif
-                                        <div class="select-button">
-                                            <a href="#" class="primary-btn view-card">VIEW CARD</a>
-                                            <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -129,20 +154,6 @@
         @yield('content')
     </section>
     <div class="container">
-        <div class="row">
-            <div class="item col-md-6 mb-6">
-                <div class="thumb effect-animate-flash">
-                    <img src="{{ asset('public/images/home/hinh50.jpg') }}" alt="Image" width="571"
-                        height="210">
-                </div>
-            </div>
-            <div class="item col-md-6 mb-6">
-                <div class="thumb effect-animate-flash">
-                    <img src="{{ asset('public/images/home/hinh51.jpg') }}" alt="Image" width="571"
-                        height="210">
-                </div>
-            </div>
-        </div>
     </div>
     <footer id="footer">
         <!--Footer-->
@@ -223,6 +234,7 @@
     <script src="{{ asset('public/js/price-range.js') }}"></script>
     <script src="{{ asset('public/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('public/js/main.js') }}"></script>
+    <script src="{{ asset('public/js/jquery-1.12.4.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.countdown.min.js') }}"></script>
@@ -230,48 +242,57 @@
     <script src="{{ asset('public/js/jquery.zoom.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.dd.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.slicknav.js') }}"></script>
+    {{-- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 
-    	<!-- JavaScript -->
-	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-	<!-- Default theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-	<!-- Semantic UI theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-	<!-- Bootstrap theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-	<!-- JavaScript -->
-
-<script>
+    <script>
         function AddCart(id) {
             $.ajax({
                 url: 'AddCart/' + id,
                 type: 'GET',
             }).done(function(response) {
                 RenderCart(response);
-                alertify.success("Đã thêm sản phẩm mới")
+                alertify.success('Thêm sản phẩm mới thành công!');
             });
         }
+        $("#change-item-cart").on("click", ".si-close i", function() {
+            // console.log($(this).data("id"));
+            $.ajax({
+                url: ' DeleteCart/' + $(this).data("id"),
+                type: 'GET',
+            }).done(function(response) {
+                RenderCart(response);
+                alertify.success('Đã xóa sản phẩm thành công!');
+            });
+        });
 
-        function RenderCart(response){
-        // console.log(response)
-        if (response)
-        {
-            $("#change-item-cart").empty();
-            $("#change-item-cart").html(response);
-            console.log($("#total-quanty-cart"));
-            $("#total-quanty-show").text($("#total-quanty-cart").val());
+        function RenderCart(response) {
+            // console.log(response)
+            if (response) {
+                $("#change-item-cart").empty();
+                $("#change-item-cart").html(response);
+                console.log($("#total-quanty-cart"));
+                $("#total-quanty-show").text($("#total-quanty-cart").val());
+            } else {
+                $("#change-item-cart").empty();
+                $("#total-quanty-show").text('0')
+            }
         }
-        else
-        {
-            $("#change-item-cart").empty();
-            $("#total-quanty-show").text('0')
-        }
-		}
     </script>
 </body>
-    @yield('footer')
-    <!--/jS-->
+@yield('footer')
+<!--/jS-->
+
 </html>

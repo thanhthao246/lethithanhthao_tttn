@@ -1,17 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'Thêm bài viết')
+@section('title', 'Thêm chủ đeè')
 @section('conten')
 
     <form action="{{ route('topic.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('post')
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Thêm chủ đề</h1>
+                            <h1>THÊM CHỦ ĐỀ</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -35,29 +34,31 @@
 
                             </div>
                             <div class="col-md-6 text-right">
-                                <button type="submit" class="btn btn-sm btn-success">
-                                    <i class="fas fa-save"></i>Lưu[Thêm]
+                                <button class="btn btn-sm btn-success" type="submit">
+                                    <i class="fas fa-save">
+                                        Lưu
+                                    </i>
                                 </button>
                                 <a href="{{ route('topic.index') }}" class="btn btn-sm btn-info">
-                                    <i class="fas fa-trash"></i>Quay về danh sách
+                                    <i class="fas fa-reply"></i>
+                                    Quay về danh sách
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        @includeIf('backend.message_alert')
+                        @includeIf('backend.massage_alert')
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="mb-3">
-                                    <label for="title">Tên danh mục</label>
-                                    <input type="text" value="{{ old('title') }}" name="title" id='title'
-                                        class="form-control" placeholder="Nhập tên danh mục">
-                                    @if ($errors->has('title'))
+                                    <label for="name">Tên chủ đề</label>
+                                    <input type="text" name="name" value="{{ old('name') }}" id="name"
+                                        class="form-control" placeholder="Nhập tên chủ đề">
+                                    @if ($errors->has('name'))
                                         <div class="text-danger">
-                                            {{ $errors->first('title') }}
+                                            {{ $errors->first('name') }}
                                         </div>
                                     @endif
-
                                 </div>
                                 <div class="mb-3">
                                     <label for="metakey">Từ khóa</label>
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="metadesc">Mô tả</label>
-                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder=" Nhập mô tả">{{ old('metadesc') }}</textarea>
+                                    <textarea name="metadesc" id="metadesc" class="form-control" placeholder="Nhập mô tả">{{ old('metadesc') }}</textarea>
                                     @if ($errors->has('metadesc'))
                                         <div class="text-danger">
                                             {{ $errors->first('metadesc') }}
@@ -80,10 +81,10 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label for="top_id">Danh mục cha</label>
-                                    <select class="form-control" name="top_id" id="top_id">
+                                    <label for="parent_id">Chủ đề cha</label>
+                                    <select class="form-control" name="parent_id" id="parent_id">
                                         <option value="0">--Cấp cha--</option>
-                                        {!! $html_top_id !!}
+                                        {!! $html_parent_id !!}
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -94,20 +95,18 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="image">Ảnh đại diện</label>
-                                    <input type="file" value="{{ old('image') }}" name="image" id='image'
-                                        class="form-control" placeholder="Nhập tên danh mục">
+                                    <label for="image">Hình đại diện</label>
+                                    <input type="file" name="image" value="{{ old('image') }}" id="image"
+                                        class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label for="status">Trạng thái</label>
                                     <select class="form-control" name="status" id="status">
-                                        <option value="1">Xuất bản </option>
+                                        <option value="1">Xuất bản</option>
                                         <option value="2">Chưa xuất bản</option>
-
                                     </select>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -121,5 +120,7 @@
             </section>
             <!-- /.content -->
         </div>
+
     </form>
+
 @endsection

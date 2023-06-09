@@ -43,8 +43,8 @@
                             <div class="search_box pull-right">
                                 <input type="text" name="keywords" id="keys"
                                     placeholder="Tìm kiếm sản phẩm..." />
-                                <button class="btn btn-primary fa fa-search" style="margin-top:0" type="submit"
-                                    id="searchsubmit"></button>
+                                <button class="btn btn-primary " style="margin-top:0px;height: 35px;" type="submit"
+                                    id="searchsubmit">Tìm kiếm</button>
                             </div>
                         </form>
                     </div>

@@ -27,13 +27,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            <button class="btn btn-sm btn-danger" type="submit">
-                                <i class="far fa-calendar-times"> Xóa</i></button>
-                        </div>
+                        
                         <div class="col-md-6 text-right">
                             <a href="{{ route('topic.index') }}" class="btn btn-sm btn-info">
-                                <i class="fas fa-trash"></i>Quay về danh sách
+                                <i class="fas fa-reply"></i>Quay về danh sách
                             </a>
                         </div>
                     </div>

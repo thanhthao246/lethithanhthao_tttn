@@ -11,6 +11,7 @@ use App\Models\Link;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Product;
+use App\Models\Contact;
 
 class SiteController extends Controller
 {
@@ -136,16 +137,17 @@ class SiteController extends Controller
 
     public function post_topic($slug)
     {
-        $row_topic = Topic::where([['slug', '=', $slug], ['status', '=', '1']])->first();
-        $args = [
-            ['status', '=', 1],
-            ['type', '=', 'post'],
-            ['topic_id', '=', $row_topic->id]
-        ];
-        $post_list = Post::where($args)
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
-        return view('frontend.post-topic', compact('row_topic', 'post_list'));
+        return view('frontend.post-topic');
+        // $row_topic = Topic::where([['slug', '=', $slug], ['status', '=', '1']])->first();
+        // $args = [
+        //     ['status', '=', 1],
+        //     ['type', '=', 'post'],
+        //     ['topic_id', '=', $row_topic->id]
+        // ];
+        // $post_list = Post::where($args)
+        //     ->orderBy('created_at', 'desc')
+        //     ->paginate(9);
+        // return view('frontend.post-topic', compact('row_topic', 'post_list'));
     }
     public function post_page($slug)
     {
